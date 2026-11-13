@@ -1,64 +1,514 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin VBR — Kelola Katalog</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin VBR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEF1F4; --surface: #FFFFFF; --ink: #16202B; --muted: #5B6877;
+    --line: #D5DCE3; --accent: #1F4FFF; --bahaya: #C62828; --ok: #1B7F3B;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  [hidden] { display: none !important; }
+  body { background: var(--bg); color: var(--ink); font-family: "Figtree", system-ui, sans-serif; line-height: 1.5; }
+  h1, h2 { font-family: "Archivo", system-ui, sans-serif; line-height: 1.15; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 20px 16px 60px; }
+  h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 16px; }
+  h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; }
+  .kartu { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; margin-bottom: 18px; }
+  label { display: block; font-weight: 600; font-size: .92rem; margin: 14px 0 6px; }
+  label small { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=password], textarea {
+    width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px;
+    font: inherit; color: inherit; background: #fff;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  input[type=file] { width: 100%; font: inherit; }
+  .info { margin-top: 4px; font-size: .85rem; color: var(--muted); }
+  button { font: inherit; font-weight: 600; cursor: pointer; }
+  .utama { margin-top: 18px; width: 100%; padding: 12px; border: none; border-radius: 10px; background: var(--accent); color: #fff; }
+  .utama:disabled { opacity: .55; cursor: not-allowed; }
+  progress { width: 100%; height: 10px; margin-top: 14px; }
+  .pesan { margin-top: 12px; font-size: .92rem; font-weight: 500; }
+  .pesan.salah { color: var(--bahaya); }
+  .pesan.benar { color: var(--ok); }
+  .baris { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .baris:first-of-type { border-top: none; }
+  .baris span { overflow-wrap: anywhere; }
+  .hapus { padding: 6px 12px; border: 1.5px solid var(--bahaya); border-radius: 8px; background: transparent; color: var(--bahaya); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 10px; }
+  .kpi div { background: #EAF0F8; border-radius: 10px; padding: 10px 12px; }
+  .kpi small { display: block; color: var(--muted); font-size: .8rem; }
+  .kpi b { font-family: "Archivo", sans-serif; font-size: 1.15rem; }
+  .hs { display: grid; grid-template-columns: 1fr 96px 70px auto; gap: 6px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+  .hs input { padding: 7px 8px; border: 1.5px solid var(--line); border-radius: 8px; font: inherit; width: 100%; }
+  .hs button, .pes select { padding: 6px 10px; border: 1.5px solid var(--accent); border-radius: 8px; background: transparent; color: var(--accent); font: inherit; }
+  .pes { padding: 10px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+  .pes small { display: block; color: var(--muted); overflow-wrap: anywhere; }
+  .atasan { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--muted); font-size: .85rem; }
+  .atasan button { padding: 6px 14px; border: 1.5px solid var(--accent); border-radius: 8px; background: transparent; color: var(--accent); font: inherit; }
+  .tab { display:flex; gap:8px; margin:12px 0; }
+  .tab button { flex:1; padding:12px; border-radius:10px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font:inherit; font-weight:600; cursor:pointer; }
+  .tab button.aktif { background:var(--accent); color:#fff; }
+  /* ---- Shared VBR storefront visual language ---- */
+  :root { --bg:#f5f7f8; --surface:#fff; --ink:#17211b; --muted:#65716a; --line:#dfe5e1; --accent:#167a4a; --bahaya:#bd3b3b; --ok:#167a4a; --radius:12px; }
+  body { background:var(--bg); color:var(--ink); }
+  .top-bar { min-height:32px; padding:7px max(16px,calc((100% - 920px)/2)); display:flex; justify-content:space-between; gap:12px; background:#102019; color:#d7e7dd; font-size:.76rem; }
+  .site-header { max-width:920px; margin:0 auto; padding:18px 16px 8px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand { display:inline-flex; align-items:center; gap:9px; color:var(--ink); text-decoration:none; font-weight:800; }
+  .brand-badge { display:inline-grid; place-items:center; min-width:43px; height:31px; padding:0 7px; border-radius:7px; background:var(--accent); color:#fff; font:800 .82rem/1 "Archivo",sans-serif; letter-spacing:.08em; }
+  .header-label { color:var(--muted); font-size:.84rem; }
+  .wrap { max-width:920px; padding-top:12px; }
+  h1 { font-size:clamp(1.7rem,4vw,2.25rem); letter-spacing:-.035em; }
+  .kartu { border-color:var(--line); border-radius:12px; box-shadow:0 7px 20px rgba(16,32,25,.045); }
+  .utama { background:var(--accent); border-radius:8px; }
+  .utama:hover { background:#0f6039; }
+  .kpi div { background:#edf7f0; }
+  .hs button, .pes select, .atasan button, .tab button { border-color:var(--accent); color:var(--accent); border-radius:8px; }
+  .tab button.aktif { background:var(--accent); color:#fff; }
+  input[type=text], input[type=password], textarea, .hs input { border-radius:8px; border-color:var(--line); }
+  .baris, .pes { border-color:var(--line); }
+  .hapus { border-radius:8px; }
+  @media (max-width:560px) { .top-bar { padding-inline:12px; font-size:.68rem; } .top-bar span:last-child { max-width:42%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .site-header { padding-inline:12px; } .header-label { font-size:.72rem; } .wrap { padding-top:8px; } }
+
+</style>
 </head>
 <body>
+<div class="top-bar"><span>Official Store &bull; Garansi Resmi Indonesia</span><span>Panel Administrasi VBR</span></div>
+<header class="site-header"><a href="./" class="brand"><span class="brand-badge">VBR</span><span>Casing PC</span></a><span class="header-label">Admin katalog</span></header>
+<main class="wrap">
+  <h1>Admin katalog VBR</h1>
 
-  <header>
-    <span class="brand"><span class="brand-badge">VBR</span> Admin Katalog</span>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <span style="font-size: 0.8rem; color: var(--green-primary); font-weight: 600;">Menyinkronkan…</span>
-      <button class="btn btn-danger">Keluar</button>
+  <!-- ===== Login ===== -->
+  <section class="kartu" id="boxLogin">
+    <h2>Masuk</h2>
+    <form id="formLogin">
+      <label for="pw">Password admin</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <button class="utama" type="submit" id="btnLogin">Masuk</button>
+      <p class="pesan" id="pesanLogin" role="status"></p>
+    </form>
+  </section>
+
+  <!-- ===== Admin ===== -->
+  <div id="boxAdmin" hidden>
+    <div class="atasan"><span id="infoSync">Menyinkronkan…</span><button type="button" id="btnKeluar">Keluar</button></div>
+    <nav class="tab" id="tab">
+      <button type="button" data-tab="pesanan" class="aktif">Pesanan</button>
+      <button type="button" data-tab="produk">Produk &amp; stok</button>
+    </nav>
+    <div id="tabPesanan">
+    <section class="kartu"><h2>Ringkasan</h2><div class="kpi" id="kpi"></div></section>
+    <section class="kartu"><h2>Pesanan</h2><div id="pesananBox">Memuat…</div></section>
     </div>
-  </header>
+    <div id="tabProduk" hidden>
+    <section class="kartu"><h2>Harga &amp; stok</h2><div id="hs">Memuat…</div></section>
+    <section class="kartu">
+      <h2>Tambah produk</h2>
+      <form id="form">
+        <label for="nama">Nama produk</label>
+        <input type="text" id="nama" required maxlength="80" autocomplete="off">
 
-  <main class="container">
-    <div class="eyebrow">Manajemen Toko</div>
-    <h1 class="page-title">Admin Katalog VBR</h1>
+        <label for="detail">Detail <small>(satu baris per spesifikasi, tekan Enter untuk baris baru)</small></label>
+        <textarea id="detail" placeholder="Ukuran: Mid Tower&#10;Motherboard: ATX, mATX&#10;Kipas bawaan: 3 unit"></textarea>
 
-    <!-- Form Login Admin -->
-    <div class="panel" style="max-width: 420px;">
-      <h2 style="font-size: 1.15rem; margin-bottom: 1rem;">Masuk Admin</h2>
-      <label>Password admin</label>
-      <input type="password" placeholder="Masukkan password admin">
-      <button class="btn btn-primary">Masuk</button>
+        <label for="foto">Foto produk <small>(boleh lebih dari satu; foto pertama jadi foto utama)</small></label>
+        <input type="file" id="foto" accept="image/*" multiple>
+        <p class="info" id="infoFoto"></p>
+
+        <label for="putar">Foto putar 360° <small>(opsional, 24 foto disarankan, diurutkan sesuai nama file)</small></label>
+        <input type="file" id="putar" accept="image/*" multiple>
+        <p class="info" id="infoPutar"></p>
+
+        <button class="utama" type="submit" id="btnSimpan">Simpan produk</button>
+        <progress id="bar" value="0" max="1" hidden></progress>
+        <p class="pesan" id="pesan" role="status"></p>
+      </form>
+    </section>
+    <section class="kartu">
+      <h2>Produk di katalog</h2>
+      <div id="daftar">Memuat…</div>
+    </section>
     </div>
+  </div>
+</main>
 
-    <!-- Navigasi Tab Admin -->
-    <div class="tabs">
-      <button class="btn btn-primary">Produk & Stok</button>
-      <button class="btn">Pesanan</button>
-    </div>
+<script>
+/* ============================================================
+   PENGATURAN
+   API_URL: tempel URL Apps Script (/exec), sama dengan di vbr.html
+   ============================================================ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbycNPt2NhAUIpFCMBjzVbsiGqBkcop6X8Qxn42Mr354oBWsCATRnQX7xEFz-yAVrvzqZA/exec';
+const UKURAN_FOTO = 1000;   // sisi terpanjang foto biasa (px)
+const UKURAN_360 = 800;     // sisi terpanjang tiap frame 360 (px)
 
-    <!-- Form Tambah Produk -->
-    <div class="panel">
-      <h2 style="font-size: 1.2rem; margin-bottom: 1.25rem;">Tambah Produk Baru</h2>
-      
-      <label>Nama produk</label>
-      <input type="text" placeholder="Contoh: VBR Z2 Panoramic White">
+let password = '';
+let token = '';
+try { token = sessionStorage.getItem('vbr_token') || ''; } catch (e) {}
+function simpanToken(t) {
+  token = t;
+  try { t ? sessionStorage.setItem('vbr_token', t) : sessionStorage.removeItem('vbr_token'); } catch (e) {}
+}
+let daftarProduk = [];
+const $ = id => document.getElementById(id);
 
-      <label>Detail (satu baris per spesifikasi, tekan Enter untuk baris baru)</label>
-      <textarea rows="4" placeholder="Form Factor: ATX / mATX&#10;Material: SPCC 0.6mm + Tempered Glass&#10;Max GPU Length: 340mm"></textarea>
+/* ---------- Komunikasi dengan Apps Script ---------- */
+async function panggil(aksi, data) {
+  if (!API_URL) throw new Error('API_URL di admin.html belum diisi.');
+  const payload = aksi === 'login'
+    ? Object.assign({ aksi, password, token: '' }, data || {})
+    : Object.assign({ aksi, token }, data || {});
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // tanpa preflight CORS
+    body: JSON.stringify(payload)
+  });
+  const j = await res.json();
+  if (!j.ok) {
+    if (/Sesi berakhir/.test(j.pesan || '')) keluar('Sesi berakhir, silakan masuk lagi.');
+    throw new Error(j.pesan || 'Terjadi kesalahan');
+  }
+  return j;
+}
 
-      <label>Foto produk (boleh lebih dari satu; foto pertama jadi foto utama)</label>
-      <input type="file" multiple accept="image/*">
+/* ---------- Login ---------- */
+$('formLogin').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('btnLogin'), ps = $('pesanLogin');
+  btn.disabled = true;
+  ps.className = 'pesan'; ps.textContent = 'Memeriksa…';
+  password = $('pw').value;
+  try {
+    const r = await panggil('login');
+    if (r.token) { simpanToken(r.token); password = ''; }
+    $('boxLogin').hidden = true;
+    $('boxAdmin').hidden = false;
+    muatDashboard();
+    muatDaftar();
+    mulaiSinkron();
+  } catch (err) {
+    password = '';
+    ps.className = 'pesan salah';
+    ps.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
 
-      <label>Foto putar 360° (opsional, 24 foto disarankan, diurutkan sesuai nama file)</label>
-      <input type="file" multiple accept="image/*">
+/* ---------- Sinkron otomatis, lanjut sesi, keluar ---------- */
+let timerSinkron = null, kotorWaktu = 0;
+function tandaiSinkron() {
+  $('infoSync').textContent = 'Tersinkron ' + new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+}
+function sedangMengedit() {
+  const a = document.activeElement;
+  return Date.now() - kotorWaktu < 120000 || (a && ($('hs').contains(a) || $('pesananBox').contains(a)));
+}
+async function sinkronOtomatis() {
+  if (document.hidden || $('boxAdmin').hidden || sedangMengedit()) return;
+  await muatDashboard();
+}
+function mulaiSinkron() {
+  clearInterval(timerSinkron);
+  timerSinkron = setInterval(sinkronOtomatis, 120000);   // tiap 2 menit, hanya saat halaman terlihat
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) sinkronOtomatis(); });
+$('hs').addEventListener('input', () => { kotorWaktu = Date.now(); });
 
-      <button class="btn btn-primary" style="margin-top: 0.5rem;">Simpan Produk</button>
-    </div>
+function keluar(pesan) {
+  clearInterval(timerSinkron);
+  if (token) {
+    fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ aksi: 'keluar', token }) }).catch(() => {});
+  }
+  simpanToken(''); password = '';
+  $('boxAdmin').hidden = true; $('boxLogin').hidden = false;
+  $('pw').value = '';
+  const ps = $('pesanLogin'); ps.className = 'pesan'; ps.textContent = pesan || '';
+}
+$('btnKeluar').addEventListener('click', () => keluar('Anda sudah keluar.'));
 
-    <!-- Daftar Produk di Katalog -->
-    <div class="panel">
-      <h2 style="font-size: 1.2rem; margin-bottom: 0.75rem;">Produk di Katalog</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Memuat daftar produk & stok…</p>
-    </div>
-  </main>
+(async () => {      // lanjutkan sesi kalau halaman dimuat ulang
+  if (!token) return;
+  try {
+    const d = await panggil('dashboard');
+    $('boxLogin').hidden = true; $('boxAdmin').hidden = false;
+    gambarDashboard(d); tandaiSinkron(); muatDaftar(); mulaiSinkron();
+  } catch (e) { simpanToken(''); }
+})();
 
+/* ---------- Daftar produk ---------- */
+async function muatDaftar() {
+  const box = $('daftar');
+  try {
+    const sep = API_URL.includes('?') ? '&' : '?';
+    const res = await fetch(API_URL + sep + 't=' + Date.now());
+    const d = await res.json();
+    daftarProduk = d.produk || [];
+  } catch (e) {
+    box.textContent = 'Daftar produk tidak bisa dimuat.';
+    return;
+  }
+  box.textContent = '';
+  if (!daftarProduk.length) { box.textContent = 'Belum ada produk.'; return; }
+
+  daftarProduk.forEach(p => {
+    const baris = document.createElement('div');
+    baris.className = 'baris';
+    const nama = document.createElement('span');
+    nama.textContent = p.nama;
+    const tombol = document.createElement('button');
+    tombol.type = 'button';
+    tombol.className = 'hapus';
+    tombol.textContent = 'Hapus';
+    tombol.onclick = () => hapus(p.nama);
+    baris.append(nama, tombol);
+    box.appendChild(baris);
+  });
+}
+
+async function hapus(nama) {
+  if (!confirm('Hapus "' + nama + '" dari katalog?\nFoto di GitHub tidak ikut terhapus.')) return;
+  try {
+    await panggil('hapus', { nama });
+    await muatDaftar();
+    muatDashboard();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+/* ---------- Ringkasan, harga & stok, pesanan ---------- */
+const rp = n => 'Rp ' + Number(n || 0).toLocaleString('id-ID');
+const STATUS = [['Baru', 'Pesanan baru'], ['Dikemas', 'Dikemas'], ['Dikirim', 'Dikirim'], ['Dibatalkan', 'Dibatalkan']];
+
+async function muatDashboard() {
+  try { gambarDashboard(await panggil('dashboard')); tandaiSinkron(); }
+  catch (e) { $('infoSync').textContent = 'Gagal sinkron: ' + e.message; }
+}
+
+function gambarDashboard(d) {
+  const isi = d.produk.filter(p => p.harga !== '' && p.stok !== '');
+  const habis = isi.filter(p => Number(p.stok) === 0).length;
+  const kpi = d.produk.map(p => ['Stok ' + p.nama, p.stok === '' ? '-' : p.stok]).concat([['Stok habis', habis]]);
+  const k = $('kpi'); k.textContent = '';
+  kpi.forEach(([l, v]) => {
+    const b = document.createElement('div');
+    const s = document.createElement('small'); s.textContent = l;
+    const t = document.createElement('b'); t.textContent = v;
+    b.append(s, t); k.appendChild(b);
+  });
+
+  const hs = $('hs'); hs.textContent = ''; kotorWaktu = 0;
+  d.produk.forEach(p => {
+    const r = document.createElement('div'); r.className = 'hs';
+    const n = document.createElement('span'); n.textContent = p.nama;
+    const h = document.createElement('input'); h.type = 'number'; h.min = 0; h.placeholder = 'Harga'; h.value = p.harga;
+    const s = document.createElement('input'); s.type = 'number'; s.min = 0; s.step = 1; s.placeholder = 'Stok'; s.value = p.stok;
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = 'Simpan';
+    b.onclick = async () => {
+      b.disabled = true;
+      try { await panggil('setHargaStok', { nama: p.nama, harga: h.value, stok: s.value }); b.textContent = 'Tersimpan'; muatDashboard(); }
+      catch (err) { alert(err.message); b.disabled = false; }
+    };
+    [h, s].forEach(el => el.addEventListener('input', () => { b.disabled = false; b.textContent = 'Simpan'; }));
+    r.append(n, h, s, b); hs.appendChild(r);
+  });
+  if (!d.produk.length) hs.textContent = 'Belum ada produk.';
+
+  const pb = $('pesananBox'); pb.textContent = '';
+  d.pesanan.forEach(o => {
+    const r = document.createElement('div'); r.className = 'pes';
+    const a = document.createElement('div');
+    a.textContent = o.id + ' · ' + o.produk + ' x' + o.jumlah + ' · ' + rp(o.total) + (o.ongkir === null ? ' · ongkir belum diisi' : ' + ongkir ' + rp(o.ongkir) + ' = ' + rp(Number(o.total) + Number(o.ongkir)));
+    const i = document.createElement('small');
+    i.textContent = (o.resi ? o.kurir + ' ' + o.resi + ' · ' : '') + o.waktu + ' · ' + o.pembeli + ' · ' + o.hp + ' · ' + o.alamat;
+    if (o.lokasi) { i.append(' · '); const m = document.createElement('a'); m.href = 'https://www.google.com/maps?q=' + o.lokasi; m.target = '_blank'; m.rel = 'noopener'; m.textContent = 'Lihat peta'; i.appendChild(m); }
+    if (o.video) { i.append(' · '); const v = document.createElement('a'); v.href = o.video; v.target = '_blank'; v.rel = 'noopener'; v.textContent = 'Video unboxing'; i.appendChild(v); }
+    if (o.rating) i.append(' · Rating ' + '★'.repeat(o.rating) + '☆'.repeat(5 - o.rating));
+    if (o.ulasan) i.append(' · Ulasan: ' + o.ulasan + (o.sembunyi ? ' (disembunyikan)' : ''));
+    (o.fotoUlasan || []).forEach((fid, n) => { i.append(' · '); const fa = document.createElement('a'); fa.href = 'https://drive.google.com/file/d/' + fid + '/view'; fa.target = '_blank'; fa.rel = 'noopener'; fa.textContent = 'Foto ' + (n + 1); i.appendChild(fa); });
+    if (o.publik) i.append(' · Tampil publik');
+    const sel = document.createElement('select');
+    const daftar = STATUS.slice();
+    if (!daftar.some(t => t[0] === o.status)) daftar.unshift([o.status, o.status === 'Selesai' ? 'Selesai (konfirmasi pembeli)' : o.status]);
+    daftar.forEach(([v, l]) => { const op = document.createElement('option'); op.value = v; op.textContent = l; if (v === o.status) op.selected = true; sel.appendChild(op); });
+    sel.onchange = async () => {
+      try { await panggil('setStatus', { id: o.id, status: sel.value }); muatDashboard(); }
+      catch (err) { alert(err.message); muatDashboard(); }
+    };
+    if (o.status === 'Selesai' || o.status === 'Dibatalkan') sel.disabled = true;
+    r.append(a, i, sel);
+    if (o.ulasan || o.publik || (o.fotoUlasan && o.fotoUlasan.length)) {
+      const ub = document.createElement('button');
+      ub.type = 'button'; ub.textContent = o.sembunyi ? 'Tampilkan ulasan' : 'Sembunyikan ulasan';
+      ub.style.cssText = 'margin-left:8px;padding:6px 10px;border:1.5px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font:inherit';
+      ub.onclick = async () => { try { await panggil('setUlasanSembunyi', { id: o.id, sembunyi: !o.sembunyi }); muatDashboard(); } catch (err) { alert(err.message); } };
+      r.appendChild(ub);
+    }
+    if (o.status !== 'Dibatalkan' && o.status !== 'Selesai') {
+      const og = document.createElement('input');
+      og.type = 'number'; og.min = '0'; og.step = '1000'; og.placeholder = 'Ongkir (Rp)'; og.value = o.ongkir === null ? '' : o.ongkir;
+      og.style.cssText = 'width:130px;margin-left:8px;padding:6px 8px;border:1.5px solid #ccc;border-radius:8px;font:inherit';
+      const ob = document.createElement('button');
+      ob.type = 'button'; ob.textContent = 'Simpan ongkir';
+      ob.style.cssText = 'margin-left:6px;padding:6px 10px;border:1.5px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font:inherit';
+      ob.onclick = async () => {
+        try { await panggil('setOngkir', { id: o.id, ongkir: og.value }); muatDashboard(); }
+        catch (err) { alert(err.message); }
+      };
+      r.append(og, ob);
+    }
+    if (o.status === 'Dikemas' || o.status === 'Dikirim') {
+      const kw = document.createElement('div');
+      kw.style.cssText = 'margin-top:8px';
+      const ks = document.createElement('select');
+      ['JNE', 'J&T', 'SiCepat', 'AnterAja', 'Pos Indonesia', 'Ninja Xpress', 'ID Express', 'Lion Parcel', 'Lainnya'].forEach(k => { const op = document.createElement('option'); op.value = k; op.textContent = k; if (k === o.kurir) op.selected = true; ks.appendChild(op); });
+      const ri = document.createElement('input');
+      ri.type = 'text'; ri.maxLength = 40; ri.placeholder = 'Nomor resi (boleh kosong)'; ri.value = o.resi || '';
+      ri.style.cssText = 'width:180px;margin-left:8px;padding:6px 8px;border:1.5px solid #ccc;border-radius:8px;font:inherit';
+      const rb = document.createElement('button');
+      rb.type = 'button'; rb.textContent = 'Simpan resi';
+      rb.style.cssText = 'margin-left:6px;padding:6px 10px;border:1.5px solid var(--accent);border-radius:8px;background:transparent;color:var(--accent);font:inherit';
+      rb.onclick = async () => {
+        try { await panggil('setResi', { id: o.id, kurir: ks.value, resi: ri.value }); muatDashboard(); }
+        catch (err) { alert(err.message); }
+      };
+      kw.append(ks, ri, rb); r.appendChild(kw);
+    }
+    pb.appendChild(r);
+  });
+  if (!d.pesanan.length) pb.textContent = 'Belum ada pesanan.';
+}
+
+/* ---------- Foto: ubah ke webp, unggah ---------- */
+async function keWebp(file, sisi) {
+  const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
+  const skala = Math.min(1, sisi / Math.max(bmp.width, bmp.height));
+  const w = Math.round(bmp.width * skala), h = Math.round(bmp.height * skala);
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  c.getContext('2d').drawImage(bmp, 0, 0, w, h);
+  bmp.close();
+  const blob = await new Promise(r => c.toBlob(r, 'image/webp', 0.82));
+  if (!blob || blob.type !== 'image/webp') {
+    throw new Error('Browser ini tidak bisa membuat gambar webp. Coba pakai Chrome.');
+  }
+  return blob;
+}
+
+function keBase64(blob) {
+  return new Promise((ok, gagal) => {
+    const r = new FileReader();
+    r.onload = () => ok(String(r.result).split(',')[1]);
+    r.onerror = () => gagal(new Error('Gagal membaca foto'));
+    r.readAsDataURL(blob);
+  });
+}
+
+async function unggah(nama, blob) {
+  const base64 = await keBase64(blob);
+  for (let i = 0; ; i++) {          // coba sampai 3 kali
+    try { return await panggil('upload', { nama, base64 }); }
+    catch (e) {
+      if (i >= 2) throw e;
+      await new Promise(r => setTimeout(r, 1500));
+    }
+  }
+}
+
+function slug(t) {
+  return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+const urut = files => [...files].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+$('foto').addEventListener('change', e => {
+  const n = e.target.files.length;
+  $('infoFoto').textContent = n ? n + ' foto dipilih' : '';
+});
+$('putar').addEventListener('change', e => {
+  const n = e.target.files.length;
+  $('infoPutar').textContent = n ? n + ' foto dipilih' : '';
+});
+
+/* ---------- Simpan produk ---------- */
+function tampilPesan(teks, salah) {
+  const p = $('pesan');
+  p.className = 'pesan ' + (salah ? 'salah' : 'benar');
+  p.textContent = teks;
+}
+
+$('form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('btnSimpan'), bar = $('bar');
+  const nama = $('nama').value.trim();
+  const s = slug(nama);
+
+  if (!s) return tampilPesan('Nama produk harus berisi huruf atau angka.', true);
+  if (daftarProduk.some(p => p.nama.toLowerCase() === nama.toLowerCase())) {
+    return tampilPesan('Produk dengan nama itu sudah ada. Hapus dulu atau pakai nama lain.', true);
+  }
+  const foto = [...$('foto').files];
+  const putar = urut($('putar').files);
+  if (putar.length === 1) return tampilPesan('Foto 360° minimal 2 foto (disarankan 24).', true);
+  if (putar.length > 99) return tampilPesan('Foto 360° maksimal 99 foto.', true);
+
+  const namaFoto = i => s + (i ? '-' + (i + 1) : '') + '.webp';
+  const namaFrame = i => s + '-360-' + String(i + 1).padStart(2, '0') + '.webp';
+
+  const tugas = [
+    ...foto.map((f, i) => ({ file: f, nama: namaFoto(i), sisi: UKURAN_FOTO })),
+    ...putar.map((f, i) => ({ file: f, nama: namaFrame(i), sisi: UKURAN_360 }))
+  ];
+
+  btn.disabled = true;
+  bar.hidden = false; bar.max = tugas.length + 1; bar.value = 0;
+  tampilPesan('Menyiapkan…', false);
+
+  try {
+    for (let i = 0; i < tugas.length; i++) {
+      tampilPesan('Mengunggah foto ' + (i + 1) + ' dari ' + tugas.length + '…', false);
+      const blob = await keWebp(tugas[i].file, tugas[i].sisi);
+      await unggah(tugas[i].nama, blob);
+      bar.value = i + 1;
+    }
+    tampilPesan('Menyimpan data produk…', false);
+    await panggil('tambah', {
+      nama,
+      detail: $('detail').value,
+      gambar: foto.map((_, i) => namaFoto(i)).join('|'),
+      putar360: putar.length ? s + '-360|' + putar.length : ''
+    });
+    bar.value = bar.max;
+    tampilPesan('Produk tersimpan. Foto butuh sekitar 1 menit untuk tampil di website.', false);
+    $('form').reset();
+    $('infoFoto').textContent = '';
+    $('infoPutar').textContent = '';
+    muatDaftar();
+  } catch (err) {
+    tampilPesan('Gagal: ' + err.message, true);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+function pilihTab(t) {
+  document.getElementById('tabPesanan').hidden = t !== 'pesanan';
+  document.getElementById('tabProduk').hidden = t !== 'produk';
+  document.querySelectorAll('#tab button').forEach(b => b.classList.toggle('aktif', b.dataset.tab === t));
+  try { localStorage.setItem('vbr_admin_tab', t); } catch (e) {}
+}
+document.querySelectorAll('#tab button').forEach(b => b.addEventListener('click', () => pilihTab(b.dataset.tab)));
+try { pilihTab(localStorage.getItem('vbr_admin_tab') === 'produk' ? 'produk' : 'pesanan'); } catch (e) { pilihTab('pesanan'); }
+</script>
 </body>
 </html>

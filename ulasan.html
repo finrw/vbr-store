@@ -1,35 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ulasan Produk · VBR Casing PC</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ulasan produk · VBR Casing PC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEF1F4;
+    --surface: #FFFFFF;
+    --ink: #16202B;
+    --muted: #5B6877;
+    --line: #D5DCE3;
+    --accent: #1F4FFF;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Figtree", system-ui, sans-serif; background: var(--bg, #eef1f4); color: var(--ink, #151c26); }
+  .bar { background: var(--surface, #fff); border-bottom: 1px solid var(--line, #dfe3e8); }
+  .bar-in { max-width: 720px; margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+  .bar a { color: #1d4ed8; text-decoration: none; font-weight: 600; }
+  .btn-kembali { display:inline-flex; align-items:center; min-height:38px; padding:8px 12px; border:1.5px solid #1d4ed8; border-radius:10px; background:#fff; color:#1d4ed8; font:inherit; font-weight:600; white-space:nowrap; }
+  .btn-kembali:hover { background:#EEF3FF; }
+  .bar b { font-family: "Archivo", system-ui, sans-serif; font-weight: 800; }
+  main { max-width: 720px; margin: 0 auto; padding: 18px 16px 40px; }
+  h1 { font-family: "Archivo", system-ui, sans-serif; font-weight: 800; font-size: 1.5rem; margin: 0 0 4px; }
+  .ringkas { color: #B26A00; font-weight: 600; margin: 0 0 16px; }
+  .kartu { background: var(--surface, #fff); border: 1px solid var(--line, #dfe3e8); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  .kartu .atas { display: flex; justify-content: space-between; gap: 8px; font-size: .9rem; }
+  .kartu .bintang { color: #F5A623; letter-spacing: 1px; }
+  .kartu p { margin: 8px 0 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .kartu small { color: var(--muted, #5c6673); }
+  .galeri { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 18px; }
+  .gitem { position: relative; padding: 0; border: 0; border-radius: 10px; overflow: hidden; aspect-ratio: 1; background: #d9dee4; cursor: pointer; }
+  .gitem img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gitem .main { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 2rem; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  h2 { font-family: "Archivo", system-ui, sans-serif; font-weight: 800; font-size: 1.1rem; margin: 18px 0 8px; }
+  .lb { position: fixed; inset: 0; background: rgba(0,0,0,.95); display: flex; flex-direction: column; align-items: center; padding: 56px 6px 8px; z-index: 50; }
+  .lb[hidden] { display: none; }
+  /* Area media memenuhi layar; video tanpa bingkai/sudut membulat. */
+  #lbIsi { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+  .lb img { max-width: 100%; max-height: 100%; object-fit: contain; border: 0; }
+  .lb iframe { width: 100%; max-width: 720px; height: 100%; border: 0; border-radius: 0; background: #000; }
+  .lb-bar { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 8px; }
+  .lb-bar button { position: static; width: 44px; height: 44px; padding: 0 0 4px; border-radius: 50%; background: rgba(255,255,255,.92); color: #16202B; font-size: 1.8rem; line-height: 1; }
+  .lb-bar button:disabled { opacity: .35; cursor: default; }
+  .lb .nomor { color: #fff; font-size: .85rem; min-width: 80px; text-align: center; }
+  .lb .cap { color: #fff; margin-top: 6px; max-width: 640px; text-align: center; font-size: .88rem; line-height: 1.35; max-height: 4.2em; overflow: auto; }
+  #lbTutup { position: absolute; top: 8px; right: 8px; border: 0; border-radius: 10px; padding: 10px 14px; font: inherit; font-weight: 700; cursor: pointer; background: rgba(255,255,255,.92); }
+  .kosong { color: var(--muted, #5c6673); }
+  /* ---- Shared VBR storefront visual language ---- */
+  :root { --bg:#f5f7f8; --surface:#fff; --ink:#17211b; --muted:#65716a; --line:#dfe5e1; --accent:#167a4a; --radius:12px; }
+  body { background:var(--bg); color:var(--ink); }
+  .top-bar { min-height:32px; padding:7px max(16px,calc((100% - 920px)/2)); display:flex; justify-content:space-between; gap:12px; background:#102019; color:#d7e7dd; font-size:.76rem; }
+  .bar { background:rgba(255,255,255,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+  .bar-in { max-width:920px; padding:15px 16px; }
+  .bar a { color:var(--accent); }
+  .btn-kembali { border-color:var(--accent); border-radius:8px; color:var(--accent); }
+  .btn-kembali:hover { background:#edf8f1; }
+  main { max-width:920px; padding:28px 16px 50px; }
+  h1 { font-size:clamp(1.7rem,4vw,2.25rem); letter-spacing:-.035em; }
+  .ringkas { color:#9a6500; }
+  .kartu { border-color:var(--line); border-radius:12px; box-shadow:0 7px 20px rgba(16,32,25,.045); }
+  .galeri { gap:10px; }
+  .gitem { border-radius:10px; box-shadow:0 3px 12px rgba(16,32,25,.08); }
+  @media (max-width:560px) { .top-bar { padding-inline:12px; font-size:.68rem; } .top-bar span:last-child { max-width:42%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } main { padding-top:22px; } }
+
+</style>
 </head>
 <body>
+<div class="top-bar"><span>Official Store &bull; Garansi Resmi Indonesia</span><span>VBR Casing PC</span></div>
+<div class="bar"><div class="bar-in"><a class="btn-kembali" href="./">&larr; Kembali ke katalog</a><b>Ulasan produk</b></div></div>
+<main>
+  <h1 id="judul">Ulasan</h1>
+  <p class="ringkas" id="ringkas"></p>
+  <section id="boxGaleri" hidden><h2>Foto &amp; video pembeli</h2><div class="galeri" id="galeri"></div></section>
+  <h2>Ulasan pembeli</h2>
+  <div id="daftar"><p class="kosong">Memuat ulasan…</p></div>
+</main>
+<div class="lb" id="lb" hidden><button type="button" id="lbTutup">Tutup</button><div id="lbIsi"></div><div class="lb-bar"><button type="button" id="lbSebelum" aria-label="Media sebelumnya">‹</button><div class="nomor" id="lbNomor"></div><button type="button" id="lbSesudah" aria-label="Media berikutnya">›</button></div><div class="cap" id="lbCap"></div></div>
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbycNPt2NhAUIpFCMBjzVbsiGqBkcop6X8Qxn42Mr354oBWsCATRnQX7xEFz-yAVrvzqZA/exec';
+const nama = new URLSearchParams(location.search).get('produk') || '';
+const el = id => document.getElementById(id);
+function pesan(t) { el('daftar').textContent = ''; const p = document.createElement('p'); p.className = 'kosong'; p.textContent = t; el('daftar').appendChild(p); }
+const idOk = x => /^[A-Za-z0-9_-]{10,80}$/.test(String(x));
+let mediaGaleri = [], mediaAktif = 0, sentuhX = 0;
+function tampilkanMedia() {
+  const item = mediaGaleri[mediaAktif];
+  if (!item) return;
+  const isi = el('lbIsi'); isi.textContent = '';
+  if (item.tipe === 'video') {
+    const f = document.createElement('iframe');
+    f.src = 'https://drive.google.com/file/d/' + item.id + '/preview'; f.allow = 'autoplay'; f.allowFullscreen = true;
+    isi.appendChild(f);
+  } else {
+    const im = document.createElement('img');
+    im.src = 'https://drive.google.com/thumbnail?id=' + item.id + '&sz=w1600'; im.alt = 'Foto pembeli';
+    isi.appendChild(im);
+  }
+  el('lbCap').textContent = item.nama + ' · ' + '\u2605'.repeat(item.bintang) + (item.komentar ? ' · ' + item.komentar : '');
+  el('lbNomor').textContent = (mediaAktif + 1) + ' / ' + mediaGaleri.length + (item.tipe === 'video' ? ' · Video' : ' · Foto');
+  el('lbSebelum').disabled = mediaAktif === 0;
+  el('lbSesudah').disabled = mediaAktif === mediaGaleri.length - 1;
+  el('lb').hidden = false;
+}
+function bukaLb(indeks) { mediaAktif = indeks; tampilkanMedia(); }
+function geserMedia(arah) {
+  const tujuan = mediaAktif + arah;
+  if (tujuan < 0 || tujuan >= mediaGaleri.length) return;
+  mediaAktif = tujuan;
+  tampilkanMedia();
+}
+function tutupLb() { el('lb').hidden = true; el('lbIsi').textContent = ''; }
+el('lbTutup').addEventListener('click', tutupLb);
+el('lbSebelum').addEventListener('click', () => geserMedia(-1));
+el('lbSesudah').addEventListener('click', () => geserMedia(1));
+el('lb').addEventListener('click', e => { if (e.target === el('lb')) tutupLb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupLb(); });
+el('lb').addEventListener('touchstart', e => { sentuhX = e.changedTouches[0].clientX; }, { passive: true });
+el('lb').addEventListener('touchend', e => {
+  const jarak = e.changedTouches[0].clientX - sentuhX;
+  if (Math.abs(jarak) > 50) geserMedia(jarak < 0 ? 1 : -1);
+}, { passive: true });
+function buatGaleri(ulasan) {
+  const item = [];
+  ulasan.forEach(u => {
+    if (u.video && idOk(u.video)) item.push({ tipe: 'video', id: u.video, nama: u.nama, bintang: u.bintang, komentar: u.komentar });
+    (u.foto || []).filter(idOk).forEach(f => item.push({ tipe: 'foto', id: f, nama: u.nama, bintang: u.bintang, komentar: u.komentar }));
+  });
+  if (!item.length) return;
+  el('boxGaleri').hidden = false;
 
-  <header>
-    <a href="index.html" class="brand"><span class="brand-badge">VBR</span> Ulasan Produk</a>
-    <a href="index.html" class="btn">&larr; Kembali ke katalog</a>
-  </header>
+  // Hanya foto yang masuk lightbox, video dibuka di tab baru
+  mediaGaleri = item.filter(it => it.tipe === 'foto').slice(0, 60);
 
-  <main class="container">
-    <div class="eyebrow">Testimoni Terverifikasi</div>
-    <h1 class="page-title">Ulasan Pembeli</h1>
-
-    <div class="panel">
-      <h2 style="font-size: 1.15rem; margin-bottom: 1rem;">Foto & Video Pembeli</h2>
-      <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));">
-        <div class="img-wrap" style="height: 110px; margin: 0;">Media 1</div>
-        <div class="img-wrap" style="height: 110px; margin: 0;">Media 2</div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2 style="font-size: 1.15rem; margin-bottom: 1rem;">Ulasan Pembeli</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Memuat ulasan…</p>
-    </div>
-  </main>
-
+  item.slice(0, 60).forEach((it) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'gitem';
+    const im = document.createElement('img'); im.loading = 'lazy'; im.alt = it.tipe === 'video' ? 'Video pembeli' : 'Foto pembeli';
+    im.src = 'https://drive.google.com/thumbnail?id=' + it.id + '&sz=w800';
+    b.appendChild(im);
+    if (it.tipe === 'video') {
+      const p = document.createElement('span'); p.className = 'main'; p.textContent = '\u25B6'; b.appendChild(p);
+      b.addEventListener('click', () => {
+        window.open('https://drive.google.com/file/d/' + it.id + '/view', '_blank');
+      });
+    } else {
+      const indeksFoto = mediaGaleri.findIndex(f => f.id === it.id);
+      b.addEventListener('click', () => bukaLb(indeksFoto));
+    }
+    el('galeri').appendChild(b);
+  });
+}
+(async function () {
+  if (!nama) { pesan('Produk tidak dipilih. Buka halaman ini dari katalog.'); return; }
+  el('judul').textContent = nama;
+  document.title = 'Ulasan ' + nama + ' · VBR Casing PC';
+  try {
+    const res = await fetch(API_URL + '?aksi=ulasan&produk=' + encodeURIComponent(nama), { cache: 'no-store' });
+    const d = await res.json();
+    if (!d.ok) throw new Error(d.error || 'Gagal memuat ulasan');
+    el('ringkas').textContent = d.jumlah ? '★ ' + Number(d.rata).toFixed(1) + ' · ' + d.jumlah + ' ulasan' : '';
+    buatGaleri(d.ulasan);
+    if (!d.ulasan.length) { pesan('Belum ada ulasan untuk produk ini.'); return; }
+    el('daftar').textContent = '';
+    d.ulasan.forEach(u => {
+      const k = document.createElement('div'); k.className = 'kartu';
+      const atas = document.createElement('div'); atas.className = 'atas';
+      const kiri = document.createElement('span');
+      const b = document.createElement('b'); b.textContent = u.nama + ' ';
+      const bt = document.createElement('span'); bt.className = 'bintang'; bt.textContent = '\u2605'.repeat(u.bintang) + '\u2606'.repeat(5 - u.bintang);
+      kiri.append(b, bt);
+      const w = document.createElement('small'); w.textContent = u.waktu;
+      atas.append(kiri, w); k.appendChild(atas);
+      if (u.komentar) { const p = document.createElement('p'); p.textContent = u.komentar; k.appendChild(p); }
+      el('daftar').appendChild(k);
+    });
+  } catch (e) { pesan('Ulasan belum bisa dimuat. Coba lagi sebentar.'); }
+})();
+</script>
 </body>
 </html>
