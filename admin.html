@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin VBR — Kelola Katalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <span class="brand"><span class="brand-badge">VBR</span> Admin Katalog</span>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="font-size: 0.8rem; color: var(--green-primary); font-weight: 600;">Menyinkronkan…</span>
+      <button class="btn btn-danger">Keluar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="eyebrow">Manajemen Toko</div>
+    <h1 class="page-title">Admin Katalog VBR</h1>
+
+    <!-- Form Login Admin -->
+    <div class="panel" style="max-width: 420px;">
+      <h2 style="font-size: 1.15rem; margin-bottom: 1rem;">Masuk Admin</h2>
+      <label>Password admin</label>
+      <input type="password" placeholder="Masukkan password admin">
+      <button class="btn btn-primary">Masuk</button>
+    </div>
+
+    <!-- Navigasi Tab Admin -->
+    <div class="tabs">
+      <button class="btn btn-primary">Produk & Stok</button>
+      <button class="btn">Pesanan</button>
+    </div>
+
+    <!-- Form Tambah Produk -->
+    <div class="panel">
+      <h2 style="font-size: 1.2rem; margin-bottom: 1.25rem;">Tambah Produk Baru</h2>
+      
+      <label>Nama produk</label>
+      <input type="text" placeholder="Contoh: VBR Z2 Panoramic White">
+
+      <label>Detail (satu baris per spesifikasi, tekan Enter untuk baris baru)</label>
+      <textarea rows="4" placeholder="Form Factor: ATX / mATX&#10;Material: SPCC 0.6mm + Tempered Glass&#10;Max GPU Length: 340mm"></textarea>
+
+      <label>Foto produk (boleh lebih dari satu; foto pertama jadi foto utama)</label>
+      <input type="file" multiple accept="image/*">
+
+      <label>Foto putar 360° (opsional, 24 foto disarankan, diurutkan sesuai nama file)</label>
+      <input type="file" multiple accept="image/*">
+
+      <button class="btn btn-primary" style="margin-top: 0.5rem;">Simpan Produk</button>
+    </div>
+
+    <!-- Daftar Produk di Katalog -->
+    <div class="panel">
+      <h2 style="font-size: 1.2rem; margin-bottom: 0.75rem;">Produk di Katalog</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Memuat daftar produk & stok…</p>
+    </div>
+  </main>
+
+</body>
+</html>
