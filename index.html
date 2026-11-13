@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #EEF1F4;
+    --bg: #F4F8F5;
     --surface: #FFFFFF;
-    --ink: #16202B;
-    --muted: #5B6877;
-    --line: #D5DCE3;
-    --accent: #1F4FFF;
+    --ink: #173326;
+    --muted: #63756B;
+    --line: #D7E4DC;
+    --accent: #2B8752;
     --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; }
@@ -36,13 +36,13 @@
     border-radius: var(--radius);
     overflow: hidden;
     aspect-ratio: 8 / 3;   /* sama dengan gambar 1600 x 600, tidak terpotong */
-    background: #0F1722;
+    background: #123022;
   }
   .slide {
     position: absolute; inset: 0;
     display: flex; align-items: flex-end;
     padding: 24px;
-    background: linear-gradient(135deg, #16202B 0%, #1F4FFF 140%);
+    background: linear-gradient(135deg, #173326 0%, #2B8752 140%);
     color: #fff;
     opacity: 0;
     visibility: hidden;
@@ -115,7 +115,7 @@
   .foto {
     aspect-ratio: 1 / 1;
     display: grid; place-items: center;
-    background: #F6F8FA;
+    background: #F0F7F2;
     border-bottom: 1px solid var(--line);
   }
   .foto img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
@@ -144,7 +144,7 @@
     overflow: auto;
   }
   dialog::backdrop { background: rgba(15, 23, 34, .6); }
-  .d-galeri { background: #F6F8FA; }
+  .d-galeri { background: #F0F7F2; }
   .d-geser {
     display: flex;
     overflow-x: auto;
@@ -183,7 +183,7 @@
   .d-panah.kiri { left: 10px; }
   .d-panah.kanan { right: 10px; }
 
-  .d-putar { background: #F6F8FA; }
+  .d-putar { background: #F0F7F2; }
   .spin {
     aspect-ratio: 4 / 3;
     display: grid; place-items: center;
@@ -231,11 +231,11 @@
   .d-total { margin-top: 12px; font-weight: 600; }
   .d-captcha { margin-top: 12px; }
   .btn-pesan, .btn-wa { display: block; width: 100%; margin-top: 14px; padding: 12px; border: none; border-radius: 10px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; }
-  .btn-wa { background: #1B7F3B; }
+  .btn-wa { background: #21824A; }
   .btn-pesan:disabled { opacity: .55; cursor: not-allowed; }
   .d-pesan { margin-top: 10px; font-size: .92rem; font-weight: 500; }
-  .d-pesan.salah { color: #C62828; }
-  .d-pesan.benar { color: #1B7F3B; }
+  .d-pesan.salah { color: #B83B3B; }
+  .d-pesan.benar { color: #21824A; }
   .akun-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:10px; margin:-4px 0 18px; }
   .akun-btn { padding:9px 14px; border:1.5px solid var(--accent); border-radius:10px; background:#fff; color:var(--accent); font:inherit; font-weight:600; cursor:pointer; }
   .akun-email { color:var(--muted); font-size:.88rem; overflow-wrap:anywhere; }
@@ -257,11 +257,11 @@
   .d-beli label.garansi { display:flex; align-items:flex-start; gap:8px; }
   .garansi { display:flex; gap:8px; align-items:flex-start; margin-top:10px; font-size:.86rem; line-height:1.4; }
   .garansi input { margin-top:3px; flex:none; }
-  .rekam-dlg { width:min(560px, 100%); max-height:100%; padding:12px; background:#0F1722; color:#fff; }
+  .rekam-dlg { width:min(560px, 100%); max-height:100%; padding:12px; background:#123022; color:#fff; }
   .rekam-dlg video { display:block; width:100%; max-height:60vh; background:#000; border-radius:10px; }
   .rekam-waktu { margin-top:10px; text-align:center; font-weight:800; font-size:1.3rem; font-variant-numeric:tabular-nums; }
   .rekam-aktif .rekam-waktu { color:#FF6B6B; }
-  .rekam-info { margin-top:6px; text-align:center; font-size:.88rem; color:#D5DCE3; }
+  .rekam-info { margin-top:6px; text-align:center; font-size:.88rem; color:#D7E4DC; }
   .rekam-aksi { display:grid; gap:8px; margin-top:12px; }
   .rekam-aksi .akun-btn { margin:0; padding:12px; }
   .akun-order a.akun-btn { display:block; text-align:center; text-decoration:none; box-sizing:border-box; padding:10px; }
@@ -272,10 +272,10 @@
   .akun-isi .peta-aksi .akun-btn { margin-top:0; }
   .peta-aksi .lebar { grid-column:1 / -1; }
   .akun-order .bintang { display:flex; align-items:center; flex-wrap:wrap; gap:2px; margin-top:6px; }
-  .akun-order .bintang-btn { width:auto; border:none; background:transparent; color:#F5A623; font-size:1.9rem; line-height:1; padding:2px 6px; cursor:pointer; }
-  .rating-kartu { margin:3px 0 0; color:#B26A00; font-weight:600; font-size:.88rem; }
+  .akun-order .bintang-btn { width:auto; border:none; background:transparent; color:#D39A26; font-size:1.9rem; line-height:1; padding:2px 6px; cursor:pointer; }
+  .rating-kartu { margin:3px 0 0; color:#9A6500; font-weight:600; font-size:.88rem; }
   .btn-ulasan-media { display:inline-flex; align-items:center; justify-content:center; min-height:38px; margin:10px 0 2px 0; padding:8px 13px; border:1.5px solid var(--accent); border-radius:10px; background:#fff; color:var(--accent); font:inherit; font-weight:600; line-height:1.2; text-decoration:none; }
-  .btn-ulasan-media:hover { background:#EEF3FF; }
+  .btn-ulasan-media:hover { background:#EDF7F0; }
   .btn-ulasan-media:active { transform:translateY(1px); }
   .dua-kolom { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .akun-order textarea { width:100%; box-sizing:border-box; margin-top:6px; padding:10px; border:1.5px solid var(--line); border-radius:10px; font:inherit; }
@@ -286,7 +286,7 @@
   .akun-atau { margin:14px 0 4px; text-align:center; color:var(--muted); font-size:.88rem; }
   .akun-pilih { display:grid; gap:10px; margin-top:10px; }
   .akun-isi .akun-btn { width:100%; margin-top:10px; }
-  .akun-status.salah { color:#C62828; }
+  .akun-status.salah { color:#B83B3B; }
   .akun-keluar { margin:12px 8px 0 0; padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:#fff; font:inherit; cursor:pointer; }
 
   /* ---- Header: tombol akun + judul tengah ---- */
@@ -301,76 +301,57 @@
   .menu-panel .akun-email { display: block; margin-bottom: 10px; }
   .menu-panel .akun-btn { width: 100%; }
 
-  /* ---- VBR storefront refresh: visual layer only ---- */
-  :root {
-    --bg: #f5f7f8;
-    --surface: #ffffff;
-    --ink: #17211b;
-    --muted: #65716a;
-    --line: #dfe5e1;
-    --accent: #167a4a;
-    --accent-dark: #0f6039;
-    --green-primary: #167a4a;
-    --radius: 12px;
-  }
-  body { background: var(--bg); color: var(--ink); }
-  .top-bar {
-    min-height: 32px; padding: 7px max(16px, calc((100% - 1120px) / 2));
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    background: #102019; color: #d7e7dd; font-size: .76rem; letter-spacing: .01em;
-  }
-  .topbar { position: sticky; top: 0; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
-  .topbar-in { max-width: 1120px; width: 100%; height: 72px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-  .topbar-judul { text-align: left; font-size: 1.1rem; letter-spacing: 0; }
-  .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); text-decoration: none; }
-  .brand-badge { display: inline-grid; place-items: center; min-width: 43px; height: 31px; padding: 0 7px; border-radius: 7px; background: var(--accent); color: #fff; font: 800 .82rem/1 "Archivo", sans-serif; letter-spacing: .08em; box-shadow: 0 5px 14px rgba(22,122,74,.18); }
-  .btn-menu { order: 2; min-width: auto; height: 42px; padding: 7px 13px; border: 1px solid var(--accent); border-radius: 8px; background: #fff; color: var(--accent); font-size: .84rem; }
-  .btn-menu:hover { background: #edf8f1; }
-  .menu-panel { top: 72px; left: auto; right: max(8px, calc((100% - 1120px) / 2)); border-radius: 10px; box-shadow: 0 16px 40px rgba(16,32,25,.14); }
-  .wrap { max-width: 1120px; padding: 0 16px 28px; }
-  .banner { margin-top: 20px; border-radius: 14px; box-shadow: 0 12px 30px rgba(16,32,25,.08); }
-  .kepala { align-items: end; margin: 34px 0 18px; }
-  .kepala::before { content: "Katalog Produk"; display: block; width: 100%; margin-bottom: -5px; color: var(--accent); font-size: .73rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-  .kepala h1 { font-size: clamp(1.75rem, 4vw, 2.45rem); letter-spacing: -.035em; }
-  .kepala p { margin-top: 7px; color: var(--muted); }
-  .cari { max-width: 300px; border-radius: 8px; padding: 11px 14px; }
-  .cari::placeholder { color: #89948e; }
-  .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
-  .kartu { min-height: 100%; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 6px 18px rgba(16,32,25,.04); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-  .kartu:hover { border-color: #9bcab0; box-shadow: 0 14px 28px rgba(16,32,25,.11); transform: translateY(-3px); }
-  .foto { background: linear-gradient(145deg, #f7faf8, #eef4f0); border-bottom: 1px solid var(--line); }
-  .foto img { padding: 16px; }
-  .info { display: flex; flex-direction: column; flex: 1; padding: 15px 16px 16px; }
-  .info h3 { font-size: 1.04rem; }
-  .info p { font-size: .87rem; }
-  .info p.harga { order: 3; margin-top: auto; padding-top: 13px; color: var(--green-primary); font-size: 1rem; font-weight: 800; }
-  .rating-kartu { color: #9a6500; }
-  .d-galeri, .d-putar { background: #f1f6f3; }
-  dialog { border-radius: 14px; box-shadow: 0 24px 70px rgba(16,32,25,.25); }
-  dialog::backdrop { background: rgba(10,25,17,.66); }
-  .d-isi, .akun-isi { padding: 22px; }
-  .btn-putar, .akun-btn, .btn-ulasan-media { border-radius: 8px; }
-  .btn-putar, .btn-ulasan-media, .akun-btn { border-color: var(--accent); color: var(--accent); }
-  .btn-pesan { background: var(--accent); border-radius: 8px; }
-  .btn-pesan:hover { background: var(--accent-dark); }
-  .btn-wa { background: #138a4d; border-radius: 8px; }
-  .tutup { border-radius: 8px; background: #17211b; }
-  .d-beli input, .d-beli textarea, .akun-isi input, .akun-isi textarea, .akun-isi select { border-radius: 8px; }
-  @media (max-width: 560px) {
-    .top-bar { padding-inline: 12px; font-size: .68rem; }
-    .top-bar span:last-child { max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .topbar-in { height: 64px; padding-inline: 12px; }
-    .menu-panel { top: 64px; right: 8px; }
-    .btn-menu span { display: none; }
-    .btn-menu { width: 42px; padding: 7px; }
-    .banner { margin-top: 14px; }
-    .kepala { margin-top: 27px; }
-    .cari { max-width: none; }
-    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-    .info { padding: 11px 11px 12px; }
-    .info h3 { font-size: .91rem; }
-    .info p { font-size: .78rem; }
-  }
+  /* Color refresh only: original layout and component placement preserved. */
+  body { background-color: var(--bg); }
+  .topbar { box-shadow: 0 1px 0 rgba(43,135,82,.08); }
+  .kartu:hover { box-shadow: 0 8px 22px rgba(23,51,38,.08); }
+  .foto { background: var(--surface); }
+
+  /* ---- EMD-inspired editorial storefront layout ---- */
+  :root { --bg:#fbfcfa; --surface:#fff; --ink:#17251d; --muted:#66736b; --line:#dce7df; --accent:#2d8650; --accent-dark:#1d6138; --pink:#c83f72; --radius:10px; }
+  body { background:var(--bg); color:var(--ink); }
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.42; background-image:linear-gradient(rgba(45,134,80,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(45,134,80,.075) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,#000 0%,transparent 70%); z-index:-1; }
+  .utility-bar { min-height:30px; padding:7px max(22px,calc((100% - 1200px)/2)); display:flex; justify-content:flex-end; gap:22px; background:#1b5e37; color:#dff0e5; font-size:.68rem; letter-spacing:.05em; }
+  .topbar { background:rgba(255,255,255,.94); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+  .topbar-in { max-width:1200px; height:70px; padding:0 22px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; color:var(--ink); text-decoration:none; font-weight:800; justify-self:start; }
+  .brand-mark { display:grid; place-items:center; width:43px; height:31px; background:var(--accent); color:#fff; border-radius:4px; font:800 .82rem/1 "Archivo",sans-serif; letter-spacing:.08em; }
+  .brand-name { font-family:"Archivo",sans-serif; font-size:1.02rem; }
+  .site-nav { display:flex; align-items:center; gap:25px; }
+  .site-nav a { color:var(--muted); text-decoration:none; font-size:.78rem; }
+  .site-nav a:hover { color:var(--accent); }
+  .btn-menu { justify-self:end; min-width:auto; border:1px solid var(--accent); border-radius:4px; background:var(--accent); color:#fff; height:40px; padding:7px 14px; }
+  .btn-menu:hover { background:var(--accent-dark); }
+  .menu-panel { top:70px; left:auto; right:max(8px,calc((100% - 1156px)/2)); border-radius:4px; box-shadow:0 16px 36px rgba(23,37,29,.14); }
+  .wrap { max-width:1200px; padding:0 22px 70px; }
+  .hero-intro { max-width:760px; padding:78px 0 52px; }
+  .eyebrow { color:var(--pink); font-size:.66rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+  .hero-intro h1 { margin-top:14px; font-size:clamp(2.45rem,6vw,5.2rem); letter-spacing:-.065em; line-height:.98; }
+  .hero-intro h1 em { color:var(--accent); font-style:normal; }
+  .hero-copy { max-width:560px; margin-top:22px; color:var(--muted); font-size:1.03rem; line-height:1.75; }
+  .hero-actions { display:flex; align-items:center; gap:18px; margin-top:28px; flex-wrap:wrap; }
+  .hero-cta { display:inline-flex; gap:16px; align-items:center; padding:13px 18px; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:.88rem; border-radius:3px; }
+  .hero-cta:hover { background:var(--accent-dark); }
+  .hero-link { color:var(--ink); text-decoration:none; font-size:.86rem; border-bottom:1px solid var(--ink); padding-bottom:3px; }
+  .banner { margin-top:4px; border-radius:3px; box-shadow:0 12px 28px rgba(23,37,29,.1); }
+  .section-rule { display:flex; justify-content:space-between; border-top:2px solid var(--accent); margin-top:52px; padding-top:12px; color:var(--muted); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; }
+  .kepala { margin:20px 0 18px; align-items:end; }
+  .kepala h2 { margin-top:9px; font-size:clamp(1.8rem,4vw,2.75rem); letter-spacing:-.045em; }
+  .kepala h1 { display:none; }
+  .kepala p:not(.eyebrow) { margin-top:8px; }
+  .cari { border-radius:3px; max-width:270px; }
+  .grid { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px; }
+  .kartu { border-radius:3px; box-shadow:0 4px 14px rgba(23,37,29,.04); }
+  .kartu:hover { border-color:var(--accent); box-shadow:0 10px 24px rgba(23,37,29,.1); transform:translateY(-2px); }
+  .foto { background:#f4f8f4; }
+  .info h3 { font-size:1.05rem; }
+  .info p.harga { color:var(--accent); }
+  .btn-pesan { background:var(--accent); border-radius:3px; }
+  .btn-pesan:hover { background:var(--accent-dark); }
+  .btn-wa { background:#217846; border-radius:3px; }
+  .akun-btn,.btn-putar,.btn-ulasan-media { border-radius:3px; }
+  .tutup { border-radius:3px; }
+  @media (max-width:700px) { .utility-bar { justify-content:space-between; padding-inline:12px; font-size:.58rem; } .topbar-in { height:62px; padding-inline:12px; grid-template-columns:1fr auto; } .site-nav { display:none; } .brand-name { display:none; } .btn-menu span { display:none; } .btn-menu { width:41px; padding:7px; } .menu-panel { top:62px; right:8px; } .hero-intro { padding:52px 0 36px; } .hero-intro h1 { font-size:clamp(2.35rem,13vw,4rem); } .hero-copy { font-size:.92rem; } .wrap { padding-inline:12px; } .section-rule { margin-top:34px; font-size:.57rem; } }
 
 </style>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
@@ -378,13 +359,11 @@
 </head>
 <body>
 
-<div class="top-bar" aria-label="Informasi toko">
-  <span>Official Store &bull; Garansi Resmi Indonesia</span>
-  <span id="auth-status">Belum login</span>
-</div>
+<div class="utility-bar"><span>Official Store &bull; Garansi resmi Indonesia</span><span>finrw.github.io/vbr-store &nbsp; EN / ID</span></div>
 <header class="topbar">
   <div class="topbar-in">
-    <div class="topbar-judul"><a href="./" class="brand"><span class="brand-badge">VBR</span><span>Casing PC</span></a></div>
+    <a class="brand" href="./"><span class="brand-mark">VBR</span><span class="brand-name">Casing PC</span></a>
+    <nav class="site-nav" aria-label="Navigasi utama"><a href="#katalog">Katalog</a><a href="ulasan.html">Ulasan</a><a href="#tentang">Tentang VBR</a></nav>
     <button class="btn-menu" id="btnMenu" type="button" aria-label="Daftar akun" aria-expanded="false" aria-controls="menuPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.7-3.4 3.2-5.5 7-5.5s6.3 2.1 7 5.5"></path></svg><span>Daftar / masuk akun</span></button>
   </div>
   <div class="menu-panel" id="menuPanel" hidden>
@@ -394,11 +373,20 @@
 </header>
 
 <main class="wrap">
+  <section class="hero-intro" id="tentang">
+    <p class="eyebrow">Grown for Indonesian builders</p>
+    <h1>Rakit lebih rapi.<br><em>Bangun lebih percaya diri.</em></h1>
+    <p class="hero-copy">Casing PC VBR dirancang untuk airflow yang lega, komponen yang terlindungi, dan setup yang siap berkembang.</p>
+    <div class="hero-actions"><a class="hero-cta" href="#katalog">Lihat katalog <span>→</span></a><a class="hero-link" href="ulasan.html">Lihat pengalaman pembeli</a></div>
+  </section>
+
   <section class="banner" id="banner" aria-label="Banner VBR"></section>
 
-  <div class="kepala">
+  <div class="section-rule"><span>VBR at a glance</span><span>Official product catalog</span></div>
+  <div class="kepala" id="katalog">
     <div>
-      <h1>Casing PC VBR</h1>
+      <p class="eyebrow">Produk pilihan</p>
+      <h2>Casing PC VBR</h2>
       <p id="jumlah">Memuat produk…</p>
     </div>
     <input class="cari" id="cari" type="search" placeholder="Cari nama casing" aria-label="Cari nama casing">
@@ -951,8 +939,6 @@ function segarkanRingkas() {
   let t = 'Belum login';
   if (customerToken) t = customerUser ? customerUser.email + (customerUser.terdaftar ? '' : ' (belum lengkap)') : 'Memeriksa sesi…';
   $('akunRingkas').textContent = t;
-  const status = $('auth-status');
-  if (status) status.textContent = t;
   $('btnAkun').textContent = customerToken ? 'Akun & Pesanan' : 'Daftar / Masuk';
 }
 function simpanSesiPelanggan(t) {

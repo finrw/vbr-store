@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #EEF1F4; --surface: #FFFFFF; --ink: #16202B; --muted: #5B6877;
-    --line: #D5DCE3; --accent: #1F4FFF; --bahaya: #C62828; --ok: #1B7F3B;
+    --bg: #F4F8F5; --surface: #FFFFFF; --ink: #173326; --muted: #63756B;
+    --line: #D7E4DC; --accent: #2B8752; --bahaya: #B83B3B; --ok: #21824A;
     --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; }
@@ -45,7 +45,7 @@
   .hapus { padding: 6px 12px; border: 1.5px solid var(--bahaya); border-radius: 8px; background: transparent; color: var(--bahaya); }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 10px; }
-  .kpi div { background: #EAF0F8; border-radius: 10px; padding: 10px 12px; }
+  .kpi div { background: #EAF6EE; border-radius: 10px; padding: 10px 12px; }
   .kpi small { display: block; color: var(--muted); font-size: .8rem; }
   .kpi b { font-family: "Archivo", sans-serif; font-size: 1.15rem; }
   .hs { display: grid; grid-template-columns: 1fr 96px 70px auto; gap: 6px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
@@ -58,32 +58,23 @@
   .tab { display:flex; gap:8px; margin:12px 0; }
   .tab button { flex:1; padding:12px; border-radius:10px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font:inherit; font-weight:600; cursor:pointer; }
   .tab button.aktif { background:var(--accent); color:#fff; }
-  /* ---- Shared VBR storefront visual language ---- */
-  :root { --bg:#f5f7f8; --surface:#fff; --ink:#17211b; --muted:#65716a; --line:#dfe5e1; --accent:#167a4a; --bahaya:#bd3b3b; --ok:#167a4a; --radius:12px; }
-  body { background:var(--bg); color:var(--ink); }
-  .top-bar { min-height:32px; padding:7px max(16px,calc((100% - 920px)/2)); display:flex; justify-content:space-between; gap:12px; background:#102019; color:#d7e7dd; font-size:.76rem; }
-  .site-header { max-width:920px; margin:0 auto; padding:18px 16px 8px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .brand { display:inline-flex; align-items:center; gap:9px; color:var(--ink); text-decoration:none; font-weight:800; }
-  .brand-badge { display:inline-grid; place-items:center; min-width:43px; height:31px; padding:0 7px; border-radius:7px; background:var(--accent); color:#fff; font:800 .82rem/1 "Archivo",sans-serif; letter-spacing:.08em; }
-  .header-label { color:var(--muted); font-size:.84rem; }
-  .wrap { max-width:920px; padding-top:12px; }
-  h1 { font-size:clamp(1.7rem,4vw,2.25rem); letter-spacing:-.035em; }
-  .kartu { border-color:var(--line); border-radius:12px; box-shadow:0 7px 20px rgba(16,32,25,.045); }
-  .utama { background:var(--accent); border-radius:8px; }
-  .utama:hover { background:#0f6039; }
-  .kpi div { background:#edf7f0; }
-  .hs button, .pes select, .atasan button, .tab button { border-color:var(--accent); color:var(--accent); border-radius:8px; }
-  .tab button.aktif { background:var(--accent); color:#fff; }
-  input[type=text], input[type=password], textarea, .hs input { border-radius:8px; border-color:var(--line); }
-  .baris, .pes { border-color:var(--line); }
-  .hapus { border-radius:8px; }
-  @media (max-width:560px) { .top-bar { padding-inline:12px; font-size:.68rem; } .top-bar span:last-child { max-width:42%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .site-header { padding-inline:12px; } .header-label { font-size:.72rem; } .wrap { padding-top:8px; } }
+
+  /* Color refresh only: original admin layout preserved. */
+  body { background-color: var(--bg); }
+  .kartu { box-shadow: 0 6px 18px rgba(23,51,38,.045); }
+
+  /* Shared EMD-inspired editorial chrome; admin controls remain unchanged. */
+  body { background:#fbfcfa; }
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.3; background-image:linear-gradient(rgba(45,134,80,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(45,134,80,.07) 1px,transparent 1px); background-size:48px 48px; z-index:-1; }
+  .wrap { max-width:920px; padding-top:58px; }
+  h1 { font-size:clamp(2rem,5vw,3rem); letter-spacing:-.05em; }
+  .kartu { border-radius:3px; box-shadow:0 8px 22px rgba(23,37,29,.06); }
+  .utama { border-radius:3px; background:#2d8650; }
+  .tab button.aktif { background:#2d8650; }
 
 </style>
 </head>
 <body>
-<div class="top-bar"><span>Official Store &bull; Garansi Resmi Indonesia</span><span>Panel Administrasi VBR</span></div>
-<header class="site-header"><a href="./" class="brand"><span class="brand-badge">VBR</span><span>Casing PC</span></a><span class="header-label">Admin katalog</span></header>
 <main class="wrap">
   <h1>Admin katalog VBR</h1>
 
