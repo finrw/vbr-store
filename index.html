@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VBR Casing PC — Katalog Resmi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>Official Store &bull; Garansi Resmi Indonesia</span>
+    <span id="auth-status">Belum login</span>
+  </div>
+
+  <header>
+    <a href="index.html" class="brand"><span class="brand-badge">VBR</span> Casing PC</a>
+    <div style="display: flex; gap: 0.6rem;">
+      <button class="btn" onclick="openModal('auth-modal')">Daftar / Masuk</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="eyebrow">Katalog Produk</div>
+    <h1 class="page-title">Casing PC VBR</h1>
+
+    <!-- Area Katalog Dinamis Anda -->
+    <div id="product-list" class="grid">
+      <!-- Contoh Kartu Produk dengan Tombol 360° -->
+      <div class="product-card">
+        <div>
+          <div class="img-wrap">
+            <span class="badge-360">Putar 360°</span>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">Memuat produk…</span>
+          </div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 0.35rem;">VBR Z1 Airflow Tempered Glass</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Mendukung ATX / Micro-ATX &bull; 4x ARGB Fan</p>
+        </div>
+        <div style="margin-top: 1.25rem; padding-top: 0.85rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+          <strong style="color: var(--green-primary);">Rp 685.000</strong>
+          <div style="display: flex; gap: 6px;">
+            <a href="ulasan.html" class="btn">Ulasan</a>
+            <button class="btn btn-primary">Beli</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Daftar / Masuk Akun -->
+  <div id="auth-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('auth-modal')">Tutup &times;</button>
+      <div class="eyebrow">Akses Pembeli</div>
+      <h2 style="margin-bottom: 0.5rem;">Daftar / Masuk</h2>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">Daftar atau masuk dulu supaya bisa membeli barang.</p>
+
+      <button class="btn" style="width: 100%; justify-content: center; font-weight: 700;">Lanjutkan dengan Google</button>
+      <div class="info-note">
+        Login Google hanya untuk memastikan nama dan email Anda asli. Kami tidak mendapat password atau data lain dari akun Google Anda. Layar Google menyebut <strong>finrw.github.io</strong> karena itu alamat situs toko ini, bukan karena terhubung ke akun GitHub.
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border); margin: 1rem 0;">
+
+      <label>Email terdaftar</label>
+      <input type="email" placeholder="nama@email.com">
+      <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 0.75rem;">Kirim kode ke email</button>
+
+      <label>Kode 6 angka</label>
+      <input type="text" maxlength="6" placeholder="000000">
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-primary" style="flex: 1; justify-content: center;">Verifikasi</button>
+        <button class="btn" onclick="closeModal('auth-modal')">Kembali</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+  </script>
+</body>
+</html>
